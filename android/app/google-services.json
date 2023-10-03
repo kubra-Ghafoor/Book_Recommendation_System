@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "328514935236",
+    "project_id": "sem-project-auth",
+    "storage_bucket": "sem-project-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328514935236:android:540d1c59549eda4750ec91",
+        "android_client_info": {
+          "package_name": "com.example.flutter_authentication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD50ZvYiQ6Inj7Xpy025GDPuCrrr-uccSI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
