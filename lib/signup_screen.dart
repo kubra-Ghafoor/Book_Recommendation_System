@@ -7,18 +7,21 @@ class SignUpScreen extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final AuthService authService = AuthService();
 
- @override
+  SignUpScreen({super.key});
+
+  @override
   Widget build(BuildContext context) {
-     signUp() async {
+    signUp() async {
       final User? user = await authService.signUp(
           emailController.text, passwordController.text);
       if (user != null) {
         print("Sign up successful"); // Add this line for debugging
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Sign up successful")));
+            .showSnackBar(const SnackBar(content: Text("Sign up successful")));
       } else {
         print("Sign up failed"); // Add this line for debugging
       }
@@ -28,47 +31,55 @@ class SignUpScreen extends StatelessWidget {
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              colors: [Colors.purple[900]!, Colors.purple[800]!, Colors.purple[400]!]),
+          gradient: LinearGradient(begin: Alignment.topCenter, colors: [
+            Colors.purple[900]!,
+            Colors.purple[800]!,
+            Colors.purple[400]!
+          ]),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const SizedBox(height: 80,),
-            const Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Sign Up",
-                    style: TextStyle(color: Colors.white, fontSize: 40),
-                  ),
-                  SizedBox(height: 10,),
-                  Text(
-                    "Create an Account",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(60),
-                    topRight: Radius.circular(60),
+        child: Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const SizedBox(
+                  height: 80,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Sign Up",
+                        style: TextStyle(color: Colors.white, fontSize: 40),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Create an Account",
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ],
                   ),
                 ),
-                child: SingleChildScrollView(
+                const SizedBox(height: 20),
+                Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(60),
+                      topRight: Radius.circular(60),
+                    ),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
-                        const SizedBox(height: 60,),
+                        const SizedBox(
+                          height: 60,
+                        ),
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -86,7 +97,9 @@ class SignUpScreen extends StatelessWidget {
                               Container(
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
+                                  border: Border(
+                                      bottom:
+                                          BorderSide(color: Colors.grey[200]!)),
                                 ),
                                 child: TextField(
                                   controller: nameController,
@@ -100,7 +113,9 @@ class SignUpScreen extends StatelessWidget {
                               Container(
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
+                                  border: Border(
+                                      bottom:
+                                          BorderSide(color: Colors.grey[200]!)),
                                 ),
                                 child: TextField(
                                   controller: emailController,
@@ -114,7 +129,9 @@ class SignUpScreen extends StatelessWidget {
                               Container(
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
+                                  border: Border(
+                                      bottom:
+                                          BorderSide(color: Colors.grey[200]!)),
                                 ),
                                 child: TextField(
                                   controller: passwordController,
@@ -129,7 +146,9 @@ class SignUpScreen extends StatelessWidget {
                               Container(
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
+                                  border: Border(
+                                      bottom:
+                                          BorderSide(color: Colors.grey[200]!)),
                                 ),
                                 child: TextField(
                                   controller: confirmPasswordController,
@@ -151,13 +170,16 @@ class SignUpScreen extends StatelessWidget {
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.purple[900],
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
                             elevation: 2,
                             minimumSize: const Size(200, 50),
                           ),
                           child: const Text(
                             "Sign Up",
-                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                         const SizedBox(height: 10.0),
@@ -174,9 +196,9 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
