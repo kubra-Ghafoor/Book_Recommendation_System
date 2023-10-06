@@ -1,175 +1,114 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class HomeScreen extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter_authentication/search_screen.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_authentication/book-section.dart';
+import 'header.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
   Widget build(BuildContext context) {
+    Future<Map<String, dynamic>> getData() async {
+      const uri = 'http://127.0.0.1:5000/';
+      final res = await http.get(Uri.parse(uri));
+      final data = json.decode(res.body);
+      return data;
+    }
+
     return Scaffold(
-        body: Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Card(
-              elevation: 8,
-              shape: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide.none),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: "Enter book name to search..",
-                  hintStyle: const TextStyle(color: Colors.grey),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide.none),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Text(
-              'Top 20 books',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.purple[900],
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Section(
-              title: 'Top 10',
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Section(
-              title: '11-20',
-            ),
-          ],
-        ),
-      ),
-    ));
-  }
-}
-
-class Section extends StatelessWidget {
-  String title;
-  Section({super.key, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 430,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.purple[900],
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Expanded(
-            child: ListView.separated(
-              itemCount: 10,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return const Book();
-              },
-              separatorBuilder: (context, index) {
-                return const SizedBox(
-                    width: 10); // Set your desired gap height here
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class Book extends StatelessWidget {
-  const Book({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 200,
-      child: Card(
-        elevation: 5,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+        body: FutureBuilder(
+      future: getData(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator.adaptive());
+        }
+        final data = snapshot.data!;
+        final List titles = data['titles'];
+        final List authors = data['authors'];
+        final List rating = data['rating'];
+        final List votes = data['votes'];
+        final List images = data['images'];
+        return SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  'book.jpg',
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                "Harry Potter and the prisoner of Azkaban",
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 15,
-                ),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Text(
-                'JK Rowling',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey[600],
-                ),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              const Row(
-                children: [
-                  Icon(Icons.star_border),
-                  Text(
-                    '4.9',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+              const Header(),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    Card(
+                      elevation: 8,
+                      shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide.none),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            hintText: "Enter book name to search..",
+                            hintStyle: const TextStyle(color: Colors.grey),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide.none),
+                            suffixIcon: IconButton(
+                              icon: const Icon(Icons.search),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const Search(name: '1984')),
+                                );
+                              },
+                            )),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    '100 Reviews',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey,
+                    const SizedBox(
+                      height: 30,
                     ),
-                  )
-                ],
-              )
+                    Text(
+                      'Top 20 books',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.purple[900],
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Section(
+                      title: 'Top 10',
+                      titles: titles.sublist(0, 10),
+                      authors: authors.sublist(0, 10),
+                      votes: votes.sublist(0, 10),
+                      rating: rating.sublist(0, 10),
+                      images: images.sublist(0, 10),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Section(
+                      title: '11-20',
+                      titles: titles.sublist(10, 20),
+                      authors: authors.sublist(10, 20),
+                      votes: votes.sublist(10, 20),
+                      rating: rating.sublist(10, 20),
+                      images: images.sublist(10, 20),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
-        ),
-      ),
-    );
+        );
+      },
+    ));
   }
 }
