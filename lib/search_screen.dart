@@ -7,20 +7,20 @@ import 'package:http/http.dart' as http;
 import 'book.dart';
 
 class Search extends StatefulWidget {
-  final name;
+  String name;
 
-  const Search({super.key, required this.name});
+  Search({super.key, required this.name});
 
   @override
   State<Search> createState() => _SearchState();
 }
 
 class _SearchState extends State<Search> {
+  final _controller = TextEditingController();
   Future getData(String name) async {
     final uri = 'http://127.0.0.1:5000//search/$name';
     final res = await http.get(Uri.parse(uri));
     final data = json.decode(res.body);
-    print('name $data');
     return data;
   }
 
@@ -33,8 +33,7 @@ class _SearchState extends State<Search> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator.adaptive());
         }
-        final data = snapshot.data!;
-        print('data $data');
+        final List data = snapshot.data!;
         return SingleChildScrollView(
           child: Column(
             children: [
@@ -50,16 +49,19 @@ class _SearchState extends State<Search> {
                           borderRadius: BorderRadius.circular(30),
                           borderSide: BorderSide.none),
                       child: TextField(
+                        controller: _controller,
+                        onSubmitted: (value) {
+                          setState(() {
+                            widget.name = value;
+                          });
+                        },
                         decoration: InputDecoration(
-                            hintText: "Enter book name to search..",
-                            hintStyle: const TextStyle(color: Colors.grey),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: BorderSide.none),
-                            suffixIcon: IconButton(
-                              icon: const Icon(Icons.search),
-                              onPressed: () {},
-                            )),
+                          hintText: "Enter book name to search..",
+                          hintStyle: const TextStyle(color: Colors.grey),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              borderSide: BorderSide.none),
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -67,7 +69,7 @@ class _SearchState extends State<Search> {
                     ),
                     Flexible(
                       child: ListView.builder(
-                        itemCount: 5,
+                        itemCount: data.length,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return Book(

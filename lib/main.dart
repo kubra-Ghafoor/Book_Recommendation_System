@@ -24,14 +24,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Colors.purple),
-      home: const Search(
-        name: '1984',
-      ),
+      home: LoginScreen(),
       routes: {
         '/login': (context) => LoginScreen(),
         '/signup': (context) => SignUpScreen(),
         '/home': (context) => const HomeScreen(),
-        '/search': (context) => const Search(
+        '/search': (context) => Search(
               name: '1984',
             ),
       },

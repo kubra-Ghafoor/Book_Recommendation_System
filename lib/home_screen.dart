@@ -14,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Future<Map<String, dynamic>> getData() async {
@@ -50,23 +51,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRadius: BorderRadius.circular(30),
                           borderSide: BorderSide.none),
                       child: TextField(
+                        controller: _controller,
+                        onSubmitted: (value) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Search(name: value)),
+                          );
+                        },
                         decoration: InputDecoration(
-                            hintText: "Enter book name to search..",
-                            hintStyle: const TextStyle(color: Colors.grey),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: BorderSide.none),
-                            suffixIcon: IconButton(
-                              icon: const Icon(Icons.search),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Search(name: '1984')),
-                                );
-                              },
-                            )),
+                          hintText: "Enter book name to search..",
+                          hintStyle: const TextStyle(color: Colors.grey),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              borderSide: BorderSide.none),
+                        ),
                       ),
                     ),
                     const SizedBox(

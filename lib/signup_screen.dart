@@ -23,7 +23,8 @@ class SignUpScreen extends StatelessWidget {
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Sign up successful")));
       } else {
-        print("Sign up failed"); // Add this line for debugging
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("Enter Correct Info")));
       }
     }
 
@@ -181,14 +182,23 @@ class SignUpScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10.0),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/login');
-                        },
-                        child: const Text(
-                          "Already have an account? Login",
-                          style: TextStyle(color: Colors.blueGrey),
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Already have an account?',
+                            style: TextStyle(color: Colors.blueGrey),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/login');
+                            },
+                            child: const Text(
+                              "Login",
+                              style: TextStyle(color: Colors.blueGrey),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
