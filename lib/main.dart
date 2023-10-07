@@ -6,6 +6,7 @@ import 'package:flutter_authentication/search_screen.dart';
 import 'package:flutter_authentication/user-provider.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
+import 'forgot_password.dart';
 import 'login_screen.dart';
 import 'signup_screen.dart';
 import 'home_screen.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         home: LoginScreen(),
         routes: {
           '/login': (context) => LoginScreen(),
+          '/forgot password':(context) => ForgotPasswordScreen(),
           '/signup': (context) => SignUpScreen(),
           '/home': (context) => const HomeScreen(),
           '/search': (context) => Search(

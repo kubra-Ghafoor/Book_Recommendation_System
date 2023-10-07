@@ -156,10 +156,20 @@ class LoginScreen extends StatelessWidget {
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
-                              const Text(
-                                'Forgot Password?',
+
+                                 // forgot password button 
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/forgot password');
+                              },
+                              child: const Text(
+                                "Forgot password",
                                 style: TextStyle(color: Colors.blueGrey),
                               ),
+                            ),
+
+
+                             
                             ],
                           ),
                           const SizedBox(height: 10.0),
