@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 import 'book.dart';
 
+// ignore: must_be_immutable
 class Search extends StatefulWidget {
   String name;
 
@@ -37,7 +38,7 @@ class _SearchState extends State<Search> {
         return SingleChildScrollView(
           child: Column(
             children: [
-              const Header(),
+              Header(),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(

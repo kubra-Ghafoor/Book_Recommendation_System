@@ -16,15 +16,16 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     signUp() async {
-      final User? user = await authService.signUp(
-          emailController.text, passwordController.text);
+      if (passwordController.text != confirmPasswordController.text) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("Password and confirm password doesn't match")));
+      }
+      final User? user = await authService.signUp(nameController.text,
+          emailController.text, passwordController.text, context);
       if (user != null) {
-        print("Sign up successful"); // Add this line for debugging
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("Sign up successful")));
-      } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("Enter Correct Info")));
+        // Add this line for debugging
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/login', (Route route) => false);
       }
     }
 
