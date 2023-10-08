@@ -12,6 +12,6 @@ Fahad Ahmed (20sw062)
 kubra ghafoor (20sw056)
 
 ## Responsive User Interface 
-![final ss of mad proo](https://github.com/kubra-Ghafoor/Book_Recommendation_System/assets/92909787/f614fb20-f6a7-4db0-a3c9-0a8a7c1f9b8e)
 
 
+![final ss of mad proo](https://github.com/kubra-Ghafoor/Book_Recommendation_System/assets/92909787/7c10c03f-0cbb-4266-89dc-e948841dedbf)
