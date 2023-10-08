@@ -19,7 +19,7 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   final _controller = TextEditingController();
   Future getData(String name) async {
-    final uri = 'http://127.0.0.1:5000//search/$name';
+    final uri = 'http://10.11.144.149:5000//search/$name';
     final res = await http.get(Uri.parse(uri));
     final data = json.decode(res.body);
     return data;

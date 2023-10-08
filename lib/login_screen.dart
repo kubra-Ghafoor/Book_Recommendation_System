@@ -124,6 +124,8 @@ class LoginScreen extends StatelessWidget {
                                       ),
                                       child: TextField(
                                         controller: passwordController,
+                                        obscureText: true, 
+
                                         decoration: const InputDecoration(
                                           hintText: "Password",
                                           hintStyle:

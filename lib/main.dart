@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_authentication/search_screen.dart';
+import 'package:flutter_authentication/splash_screen.dart';
 import 'package:flutter_authentication/user-provider.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primaryColor: Colors.purple),
-        home: LoginScreen(),
+        home: SplashScreen(),
         routes: {
           '/login': (context) => LoginScreen(),
           '/forgot password':(context) => ForgotPasswordScreen(),

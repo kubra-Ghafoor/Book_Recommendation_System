@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     Future<Map<String, dynamic>> getData() async {
-      const uri = 'http://127.0.0.1:5000/';
+      const uri = 'http://10.11.144.149:5000';
       final res = await http.get(Uri.parse(uri));
       final data = json.decode(res.body);
       return data;
