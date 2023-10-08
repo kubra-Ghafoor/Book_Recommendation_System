@@ -1,16 +1,14 @@
-# flutter_authentication
+# Book Recommendation App
+The Book Recommendation App is a mobile application developed as part of my semester project for mobile application development. It is designed to assist users in finding their next read. It employs advanced techniques such as Popularity-Based Filtering and Collaborative Filtering to offer personalized book suggestions, enhancing the reading experience for users. The app addresses the challenge of information overload by providing tailored recommendations, thus streamlining the book selection process for users.
+## Technologies Used
+•	Frontend: Flutter for creating an interactive and user-friendly interface.
+•	Backend: Flask for handling user requests and providing responses.
+•	Data Analysis and Visualization: Jupyter Notebook for exploring datasets and generating insights.
+## Contributors
+Fahad Ahmed (20sw062)
 
-A new Flutter project.
+kubra ghafoor (20sw056)
 
-## Getting Started
+## Responsive User Interface 
+![Untitled designhhhhhhhhhhhhhhhhhh](https://github.com/kubra-Ghafoor/Book_Recommendation_System/assets/92909787/c61fd859-4aad-4325-8e1e-d44d75e9430f)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
